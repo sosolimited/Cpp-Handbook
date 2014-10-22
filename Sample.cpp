@@ -25,22 +25,22 @@ using namespace std;
 class DummyObject
 {
 public:
-	DummyObject( const std::string &name, int &counter ):
+	DummyObject( const std::string &name, const std::shared_ptr<int> &counter ):
 		_name( name ),
 		_counter( counter )
 	{
-		_counter += 1;
+		*_counter += 1;
 		cout << "Created " << _name << endl;
 	}
 
 	~DummyObject()
 	{
-		_counter -= 1;
+		*_counter -= 1;
 		cout << "Destroyed " << _name << endl;
 	}
 private:
-	string 	_name;
-	int 		&_counter;
+	string 								_name;
+	std::shared_ptr<int>	_counter;
 };
 
 ///
@@ -49,7 +49,7 @@ private:
 int main( int argc, char const *argv[] )
 {
 	// Test counter.
-	int noise_count = 0;
+	auto noise_count = make_shared<int>( 0 );
 
 	{
 		// Enter a new scope here so we can see object lifetime management
@@ -78,11 +78,11 @@ int main( int argc, char const *argv[] )
 		// leak the DummyObject object once the pointer falls out of scope.
 		DummyObject *raw = new DummyObject( "Raw Pointer", noise_count );
 
-		cout << noise_count << " element(s) created." << endl;
+		cout << *noise_count << " element(s) created." << endl;
 		cout << "===Leaving Scope===" << endl;
 	}
 
-	cout << noise_count << " element(s) remaining." << endl;
+	cout << *noise_count << " element(s) remaining." << endl;
 
 	return 0;
 }
