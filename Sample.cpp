@@ -49,40 +49,40 @@ private:
 int main( int argc, char const *argv[] )
 {
 	// Test counter.
-	auto noise_count = make_shared<int>( 0 );
+	auto object_counter = make_shared<int>( 0 );
 
 	{
 		// Enter a new scope here so we can see object lifetime management
 
 		// Creates an object that will live as long as it is in scope.
 		// This is a reasonable default mode of creating things.
-		DummyObject stack( "Stack Allocated", noise_count );
+		DummyObject stack( "Stack Allocated", object_counter );
 
 		// Creates a shared_ptr object that manages a pointer to a DummyObject object.
 		// This is our default for objects that need to be created dynamically (e.g. for polymorphism)
-		auto shared = make_shared<DummyObject>( "shared_ptr", noise_count );
+		auto shared = make_shared<DummyObject>( "shared_ptr", object_counter );
 
 		// Creates a unique_ptr object that manages a pointer to a DummyObject object.
 		// When only one thing refers to a dynamically-created object, we use unique_ptr.
-		auto unique = std::unique_ptr<DummyObject>( new DummyObject( "unique_ptr", noise_count ) );
+		auto unique = std::unique_ptr<DummyObject>( new DummyObject( "unique_ptr", object_counter ) );
 
 		// unique_ptr can be converted to a shared_ptr.
 		// We need to move() the unique_ptr object to avoid deleting the pointer in its destructor.
 		// Once the unique_ptr object is moved(), it is no longer valid.
-		auto unique_too = std::unique_ptr<DummyObject>( new DummyObject( "unique_ptr 2", noise_count ) );
+		auto unique_too = std::unique_ptr<DummyObject>( new DummyObject( "unique_ptr 2", object_counter ) );
 		// Move the unique_ptr's contents into a shared_ptr.
 		shared_ptr<DummyObject> shared_too = std::move( unique_too );
 
 		// Creates and assign a raw pointer. Don't do this.
 		// The raw pointer has no destructor, so it will
 		// leak the DummyObject object once the pointer falls out of scope.
-		DummyObject *raw = new DummyObject( "Raw Pointer", noise_count );
+		DummyObject *raw = new DummyObject( "Raw Pointer", object_counter );
 
-		cout << *noise_count << " element(s) created." << endl;
+		cout << *object_counter << " element(s) created." << endl;
 		cout << "===Leaving Scope===" << endl;
 	}
 
-	cout << *noise_count << " element(s) remaining." << endl;
+	cout << *object_counter << " element(s) remaining." << endl;
 
 	return 0;
 }
