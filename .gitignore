@@ -17,4 +17,4 @@ DerivedData
 .DS_Store
 
 *.app
-.DS_Store
+*.sample

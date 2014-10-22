@@ -12,5 +12,5 @@ $ make all
 
 ## Running
 ```bash
-$ ./Sample.app
+$ ./SampleName.sample
 ```
