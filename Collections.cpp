@@ -32,10 +32,10 @@ void vectorAssignment()
 
 void vectorRetrieval()
 {
+	cout << "Vector Retrieval" << endl;
 	// Prefer the use of range-based for loops.
 	// The typed element to the left of the colon will be filled with each
 	// value in the collection on the right side of the colon in order.
-
 	for( auto &number : numberVector )
 	{
 		cout << number << endl;
@@ -43,15 +43,15 @@ void vectorRetrieval()
 
 	// Using square braces doesn't check whether you are past the end.
 	// This can be dangerous, since we can manipulate memory that doesn't belong to us.
-	// Here, we read past the end of the vector. BAD FORM!
-
+	// Here, we read past the end of the vector. We will probably get a nonsense value.
 	cout << numberVector[5] << endl;
 
-	// .at( index ) is range-checked, so it will crash if you try to]
+	// Prefer the use of .at( index ) to bracket indexing.
+	// .at( index ) is range-checked, so it will crash if you try to
 	// access past the end of your vector. This is a GOOD THING, because
 	// it lets us know that we made a mistake in our access code.
-
 	cout << numberVector.at( 0 ) << endl;
+
 	// Uncomment the following to produce a helpful crash.
 	// cout << numberVector.at( 5 ) << endl;
 
@@ -72,17 +72,26 @@ void mapAssignment()
 	numberUnorderedMap["one"] = 2;
 	numberUnorderedMap["two"] = 4;
 	numberUnorderedMap["soso"] = 200;
+
+	// We can also assign with an initializer list.
+	// This constructs a map that replaces the previous one in numberUnorderedMap
+	numberUnorderedMap = { { "one", 3 }, { "two", 6 }, { "soso", 300 } };
+	numberUnorderedMap.insert( { "five", 500 } );
 }
 
 void mapRetrieval()
 {
 	// Prefer the use of range-based for loops.
 	// In a map, each item is a key-value pair, so iteration returns both.
+	// Note that the order of iteration is unrelated to the order of insertion.
+
+	cout << "map Retrieval" << endl;
 	for( auto &pair : numberMap )
 	{
 		cout << pair.first << " => " << pair.second << endl;
 	}
 
+	cout << "unordered_map Retrieval" << endl;
 	for( auto &pair : numberUnorderedMap )
 	{
 		cout << pair.first << " => " << pair.second << endl;
