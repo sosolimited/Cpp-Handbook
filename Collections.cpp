@@ -44,6 +44,7 @@ void vectorRetrieval()
 	// Using square braces doesn't check whether you are past the end.
 	// This can be dangerous, since we can manipulate memory that doesn't belong to us.
 	// Here, we read past the end of the vector. We will probably get a nonsense value.
+	cout << "Access past end with [] => ";
 	cout << numberVector[5] << endl;
 
 	// Prefer the use of .at( index ) to bracket indexing.
@@ -52,8 +53,17 @@ void vectorRetrieval()
 	// it lets us know that we made a mistake in our access code.
 	cout << numberVector.at( 0 ) << endl;
 
-	// Uncomment the following to produce a helpful crash.
-	// cout << numberVector.at( 5 ) << endl;
+	// We run the following access in a try-catch since we know it will
+	// crash as it is an out-of-range access and .at() is checked.
+	try
+	{
+		cout << "Access past end with .at() => ";
+		cout << numberVector.at( 5 ) << endl;
+	}
+	catch( std::exception &exc )
+	{
+		cout << "Error: " << typeid(exc).name() << ": " << exc.what() << endl;
+	}
 
 	// You can conveniently get the first and last values in a collection:
 	cout << numberVector.front() << ", " << numberVector.back() << endl;
