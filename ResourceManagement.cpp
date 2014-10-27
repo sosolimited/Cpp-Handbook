@@ -26,21 +26,21 @@ class DummyObject
 {
 public:
 	DummyObject( const std::string &name, const std::shared_ptr<int> &counter ):
-		_name( name ),
-		_counter( counter )
+		name( name ),
+		counter( counter )
 	{
-		*_counter += 1;
-		cout << "Created " << _name << endl;
+		*counter += 1;
+		cout << "Created " << name << endl;
 	}
 
 	~DummyObject()
 	{
-		*_counter -= 1;
-		cout << "Destroyed " << _name << endl;
+		*counter -= 1;
+		cout << "Destroyed " << name << endl;
 	}
 private:
-	string 								_name;
-	std::shared_ptr<int>	_counter;
+	string 								name;
+	std::shared_ptr<int>	counter;
 };
 
 ///

@@ -26,3 +26,7 @@ $ ./SampleName.sample
 
 ## Future Samples:
 Concurrency (std::async, std::thread)
+
+## Code Style
+
+This being a Sosolimited project, we follow the company code conventions throughout. We use 2-space tabs, so you might need to adjust your editor settings for everything to line up nicely.
