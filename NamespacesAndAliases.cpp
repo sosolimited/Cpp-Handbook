@@ -39,14 +39,23 @@ int main( int argc, char const *argv[] )
 	return 0;
 }
 
-// Define our constructor.
+// Define our constructor for the DataAggregate in the project namespace.
 project::DataAggregate::DataAggregate( float iOne, float iTwo ):
 	memberOne( iOne ),
 	memberTwo( iTwo )
 {}
 
-// Define our constructor.
-project::module::DataAggregate::DataAggregate( float iValue, const string &iName ):
+// We can also re-open a namespace in the source file and put our definitions in it
+// in order to avoid the long chain of namespace::namespace:: specifications
+namespace project
+{
+namespace module
+{
+
+DataAggregate::DataAggregate( float iValue, const string &iName ):
 	value( iValue ),
 	name( iName )
 {}
+
+} // namespace module
+} // namespace project
