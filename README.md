@@ -1,11 +1,13 @@
 
 # Effective Cpp Demos
 
-Console programs demonstrating techniques from Scott Meyer’s Effective Cpp series.
+Compilable source files explaining common modern C++ techniques. Heavily commented source files are meant to explain the content, while running the programs may show “proof” of their stated behavior.
 
-Will also expand a bit from there, but that is the rock on which these are built.
+Techniques shown are heavily inspired by Scott Meyer’s [Effective Cpp](http://www.aristeia.com/books.html) books as well as Herb Sutter’s [Guru of the Week](http://herbsutter.com/gotw/). Additionally, the content Bjarne Stroustrup’s [A Tour of C++](http://www.stroustrup.com/Tour.html) is essential.
 
-Sample currently demonstrates managing resources (e.g. pointers) with objects. Shows off std::shared_ptr, unique_ptr, and moving from a unique_ptr to a shared_ptr.
+We hope to cover enough of the content from those sources in a condensed format that makes it easy to jump in and be productive in a modern C++ project. Of course, we cannot cover the subject in as much depth or breadth as any of the sources mentioned above. Please see them if you are interested in more details.
+
+This is, as many things are, a work in progress.
 
 ## Building
 ```bash
@@ -17,4 +19,10 @@ $ make all
 $ ./SampleName.sample
 ```
 
+## Current Samples:
+- Resource Management: smart pointer types and managing resources with objects.
+- Namespaces and Aliases: covers ways of sectioning code with modules and writing readable names.
+- Collections: covers different types of containers, with "CRUD" operations on their contents.
+
+## Future Samples:
 Concurrency (std::async, std::thread)
