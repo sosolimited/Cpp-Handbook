@@ -30,3 +30,11 @@ Concurrency (std::async, std::thread)
 ## Code Style
 
 This being a Sosolimited project, we follow the company code conventions throughout. We use 2-space tabs, so you might need to adjust your editor settings for everything to line up nicely.
+
+## C++ Versions and Compatibility
+
+This is only tested with clang on OSX. All code should work in VS2013, as well.
+
+We tell the compiler to use C++14 so we can use std::make_unique, which (like many C++14 features) really just completes and adds consistency to things in C++11. Other than that, everything should compile fine with just C++11 (and much will with C++98).
+
+Currently, C++14 is called C++1y by Clang, as they are using the latest draft of the standard (which is yet to be finalized). Since we’re only using make_unique from it, there isn’t much to worry about.

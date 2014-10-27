@@ -64,13 +64,15 @@ int main( int argc, char const *argv[] )
 
 		// Creates a unique_ptr object that manages a pointer to a DummyObject object.
 		// When only one thing refers to a dynamically-created object, we use unique_ptr.
-		auto unique = std::unique_ptr<DummyObject>( new DummyObject( "unique_ptr", object_counter ) );
+		auto unique = std::make_unique<DummyObject>( "unique_ptr", object_counter );
 
 		// unique_ptr can be converted to a shared_ptr.
-		// We need to move() the unique_ptr object to avoid deleting the pointer in its destructor.
 		// Once the unique_ptr object is moved(), it is no longer valid.
-		auto unique_too = std::unique_ptr<DummyObject>( new DummyObject( "unique_ptr 2", object_counter ) );
+		auto unique_too = std::make_unique<DummyObject>( "unique_ptr 2", object_counter );
 		// Move the unique_ptr's contents into a shared_ptr.
+		// We need to move() the unique_ptr object to avoid deleting the pointer in the unique_ptr's destructor.
+		// Thankfully, the compiler enforces this move and will fail to build if we don't explicitly
+		// move ownership of the pointer from the unique_ptr object to the shared_ptr object.
 		shared_ptr<DummyObject> shared_too = std::move( unique_too );
 
 		// Creates and assign a raw pointer. Don't do this.
