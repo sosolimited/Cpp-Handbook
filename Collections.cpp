@@ -44,6 +44,11 @@ void vectorRetrieval()
 	// Using square braces doesn't check whether you are past the end.
 	// This can be dangerous, since we can manipulate memory that doesn't belong to us.
 	// Here, we read past the end of the vector. We will probably get a nonsense value.
+	//
+	// This is bad news, since the compiler can't help us, and the debugger can't either.
+	// We will get undefined, unexpected behavior which is almost always not good.
+	// If we wrote anything to this position in the vector, we would be asking for
+	// a mysterious crash later.
 	cout << "Access past end with [] => ";
 	cout << numberVector[5] << endl;
 
@@ -55,6 +60,13 @@ void vectorRetrieval()
 
 	// We run the following access in a try-catch since we know it will
 	// crash as it is an out-of-range access and .at() is checked.
+	//
+	// Generally, we don't use try-catch around .at() calls, since we want
+	// the program to crash during testing so we can fix the issue.
+	//
+	// If you were debugging in Xcode or Visual Studio without the try/catch,
+	// the program would halt at this point and open the debugger so you could
+	// figure out what you were doing wrong.
 	try
 	{
 		cout << "Access past end with .at() => ";
