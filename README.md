@@ -20,12 +20,14 @@ $ ./SampleName.sample
 ```
 
 ## Current Samples:
-- Resource Management: smart pointer types and managing resources with objects.
-- Namespaces and Aliases: covers ways of sectioning code with modules and writing readable names.
-- Collections: covers different types of containers, with "CRUD" operations on their contents.
+- Resource (Memory) Management: smart pointer types and managing resources (e.g. memory) with objects.
+- Namespaces and Aliases: organizing code into modules and writing readable names.
+- Collections: sequential and key-based containers, with "CRUD" operations on their contents.
+- Async and Future: load and parse a file asynchronously and read the results back in the main thread.
 
 ## Future Samples:
-Concurrency (std::async, std::thread)
+- Concurrency
+	- Threads and atomics (maybe sometimes needed, can be useful for running void functions)
 
 ## Code Style
 
