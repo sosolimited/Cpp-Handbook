@@ -20,14 +20,14 @@ $ ./SampleName.sample
 ```
 
 ## Current Samples:
+- Object Creation: creating C++ objects dynamically and on the stack.
 - Resource (Memory) Management: smart pointer types and managing resources (e.g. memory) with objects.
 - Namespaces and Aliases: organizing code into modules and writing readable names.
 - Collections: sequential and key-based containers, with "CRUD" operations on their contents.
 - Async and Future: load and parse a file asynchronously and read the results back in the main thread.
 
 ## Future Samples:
-- Concurrency
-	- Threads and atomics (maybe sometimes needed, can be useful for running void functions)
+- Threads and atomics (for continuously-running objects that process tasks without returning a value)
 
 ## Code Style
 
