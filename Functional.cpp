@@ -84,7 +84,6 @@ void lambdaParameters() {
 	/// Lambdas can do arbitrary computation. They don't need to call other functions.
 	/// You define parameters to a lambda the same way you define parameters for a function.
 	auto make_range = [] ( int low, int high ) {
-		cout << "I'm going to return a range from " << low << " to " << high << endl;
 		std::vector<int> range;
 		auto begin = std::min( low, high );
 		auto end = std::max( low, high );
