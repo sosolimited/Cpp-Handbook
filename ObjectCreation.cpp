@@ -21,16 +21,15 @@ using namespace std;
 ///
 class BaseObject {
 public:
-	BaseObject( const std::string &name ):
-		name( name )
+	BaseObject( const std::string &name )
+	:	name( name )
 	{
 		cout << "Created " << name << endl;
 	}
 
 	/// If you are making a class that is intended to be subclassed, declare its destructor virtual.
 	/// This allows C++ to do the right thing when destroying a subclass via a pointer to the base class.
-	virtual ~BaseObject()
-	{
+	virtual ~BaseObject() {
 		cout << "Cleaning up BaseObject: " << name << endl;
 	}
 
@@ -47,12 +46,11 @@ public:
 ///
 class DerivedObject : public BaseObject {
 public:
-	DerivedObject( const std::string &name ):
-		BaseObject( name )
+	DerivedObject( const std::string &name )
+	:	BaseObject( name )
 	{}
 
-	~DerivedObject()
-	{
+	~DerivedObject() {
 		cout << "Cleaning up DerivedObject: " << name << endl;
 	}
 
@@ -67,8 +65,7 @@ public:
 //=================================================================
 
 /// Pass objects by const reference in almost all circumstances.
-void useObject( const BaseObject &object )
-{
+void useObject( const BaseObject &object ) {
 	object.printName();
 }
 
@@ -77,8 +74,7 @@ void useObject( const BaseObject &object )
 ///
 /// An alternative (used by Cinder) is to pass by pointer when you will modify the object,
 /// since it makes the function clearly different at the call site.
-void changeObject( BaseObject &object )
-{
+void changeObject( BaseObject &object ) {
 	object.name += " has been changed";
 }
 
@@ -86,8 +82,7 @@ void changeObject( BaseObject &object )
 // Functions demonstrating object creation.
 //============================================================
 
-void createStackObjects()
-{
+void createStackObjects() {
 	// Stack-allocated objects have automatic lifetime management.
 	// They are valid until the block scope they are declared in ends.
 	// Blocks are delimited with curly-braces {}.
@@ -108,8 +103,7 @@ void createStackObjects()
 	cout << "Leaving Function" << endl;
 }
 
-void createDynamicObjects()
-{
+void createDynamicObjects() {
 	// Dynamically-allocated objects should be stored in a stack-allocated object.
 	// C++ provides two such objects that are the most useful: std::shared_ptr and std::unique_ptr
 	// We can create these pointer objects with the std::make_shared and std::make_unique functions.
@@ -158,8 +152,7 @@ void createDynamicObjects()
 ///
 /// Test program showing destructor behavior.
 ///
-int main( int argc, char const *argv[] )
-{
+int main() {
 	cout << "Stack Allocated Objects" << endl;
 	cout << "=======================" << endl;
 	createStackObjects();
@@ -168,16 +161,13 @@ int main( int argc, char const *argv[] )
 	cout << "Dynamically Allocated Objects" << endl;
 	cout << "=============================" << endl;
 	createDynamicObjects();
-
-	return 0;
 }
 
 //============================================================
 // Object method implementations
 //============================================================
 
-void BaseObject::printName() const
-{
+void BaseObject::printName() const {
 	// Often, you might have work that must be done whenever a method is called.
 	// To facilitate that, create a non-virtual base method that does the setup
 	// and calls the virtual method.
@@ -189,12 +179,10 @@ void BaseObject::printName() const
 	cout << endl;
 }
 
-void BaseObject::customPrintName() const
-{
+void BaseObject::customPrintName() const {
 	cout << "BaseObject: " << name;
 }
 
-void DerivedObject::customPrintName() const
-{
+void DerivedObject::customPrintName() const {
 	cout << "DerivedObject: " << name;
 }

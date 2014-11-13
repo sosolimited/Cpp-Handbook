@@ -24,20 +24,17 @@ std::map<string, float>	numberMap;
 // Unordered Maps are true maps, so key-based lookup should be faster than std::map.
 std::unordered_map<string, float>	numberUnorderedMap;
 
-void vectorAssignment()
-{
+void vectorAssignment() {
 	// Construct vector with an initializer list, filling it with each value in the list.
 	numberVector = { 1, 2, 1.5f, 3 };
 }
 
-void vectorRetrieval()
-{
+void vectorRetrieval() {
 	cout << "Vector Retrieval" << endl;
 	// Prefer the use of range-based for loops.
 	// The typed element to the left of the colon will be filled with each
 	// value in the collection on the right side of the colon in order.
-	for( auto &number : numberVector )
-	{
+	for( auto &number : numberVector ) {
 		cout << number << endl;
 	}
 
@@ -67,13 +64,11 @@ void vectorRetrieval()
 	// If you were debugging in Xcode or Visual Studio without the try/catch,
 	// the program would halt at this point and open the debugger so you could
 	// figure out what you were doing wrong.
-	try
-	{
+	try {
 		cout << "Access past end with .at() => ";
 		cout << numberVector.at( 5 ) << endl;
 	}
-	catch( std::exception &exc )
-	{
+	catch( std::exception &exc ) {
 		cout << "Error: " << typeid(exc).name() << ": " << exc.what() << endl;
 	}
 
@@ -85,8 +80,7 @@ void vectorRetrieval()
 	// The std::pair and std::tuple types can help with this.
 }
 
-void mapAssignment()
-{
+void mapAssignment() {
 	numberMap["one"] = 1;
 	numberMap["two"] = 2;
 	numberMap["soso"] = 100;
@@ -101,8 +95,7 @@ void mapAssignment()
 	numberUnorderedMap.insert( { "five", 500 } );
 }
 
-void mapRetrieval()
-{
+void mapRetrieval() {
 	// Prefer the use of range-based for loops.
 	// In a map, each item is a key-value pair, so iteration returns both.
 	// Note that the order of iteration is unrelated to the order of insertion.
@@ -120,12 +113,9 @@ void mapRetrieval()
 	}
 }
 
-int main( int argc, char const *argv[] )
-{
+int main() {
 	vectorAssignment();
 	vectorRetrieval();
 	mapAssignment();
 	mapRetrieval();
-
-	return 0;
 }

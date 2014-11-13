@@ -22,19 +22,17 @@ using namespace std;
 /// DummyObject prints to cout when it is created and destroyed.
 /// It also updates a counter, so we can tally the total DummyObject's in existence.
 ///
-class DummyObject
-{
+class DummyObject {
 public:
-	DummyObject( const std::string &name, const std::shared_ptr<int> &counter ):
-		name( name ),
+	DummyObject( const std::string &name, const std::shared_ptr<int> &counter )
+	:	name( name ),
 		counter( counter )
 	{
 		*counter += 1;
 		cout << "Created " << name << endl;
 	}
 
-	~DummyObject()
-	{
+	~DummyObject() {
 		*counter -= 1;
 		cout << "Destroyed " << name << endl;
 	}
@@ -46,8 +44,7 @@ private:
 ///
 /// Test program showing destructor behavior.
 ///
-int main( int argc, char const *argv[] )
-{
+int main() {
 	// Test counter.
 	auto object_counter = make_shared<int>( 0 );
 
@@ -85,6 +82,4 @@ int main( int argc, char const *argv[] )
 	}
 
 	cout << *object_counter << " element(s) remaining." << endl;
-
-	return 0;
 }
