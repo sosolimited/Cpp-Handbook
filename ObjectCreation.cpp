@@ -118,7 +118,7 @@ void createDynamicObjects()
 	// (1) the pointer object on the stack, and
 	// (2) the pointed-to object in dynamic memory.
 	// The pointer object is used as a handle (or pointer) to the dynamic object, and
-	// automatically manages the memory allocation of the dynamic object.
+	// automatically manages the memory (de)allocation of the dynamic object.
 
 	// Here we create two shared_ptr objects.
 	// shared_ptr's are our bread-and-butter for polymorphism and dynamic allocations.
