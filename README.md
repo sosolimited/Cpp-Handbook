@@ -20,20 +20,20 @@ $ ./SampleName.sample
 
 ## The Samples:
 
-The samples are loosely ordered. The sequence laid out below will hopefully make the most sense if you don't know where to start.
+The samples are loosely ordered. If you don't how what you want to look at, go through the samples in the order shown below.
 
-- Object Creation: creating C++ objects dynamically and on the stack.
-- Namespaces and Aliases: organizing code into modules and writing readable names.
-- Templates: creating functions that can operate on many types.
-- Functional: creating function objects (lambdas).
-- Collections: sequential and key-based containers, with "CRUD" operations on their contents.
-- Async and Future: load and parse a file asynchronously and read the results back in the main thread.
+- __Object Creation__: creating C++ objects dynamically and on the stack.
+- __Namespaces and Aliases__: organizing code into modules and writing readable names.
+- __Templates__: creating functions that can operate on many types.
+- __Functional__: creating function objects (lambdas).
+- __Collections__: sequential and key-based containers, with "CRUD" operations on their contents.
+- __Async and Future__: load and parse a file asynchronously and read the results back in the main thread.
 
 ### Early Samples
-- Resource (Memory) Management: smart pointer types and managing resources (e.g. memory) with objects. Object Creation is probably a better sample for these concepts.
+- __Resource Management__: smart pointer types and managing resources (e.g. memory) with objects. Object Creation is probably a better sample for these concepts.
 
 ### Forthcoming? Samples:
-- Threads and atomics (for continuously-running objects that process tasks without returning a value)
+- __Threads and Atomics__ (for continuously-running objects that process tasks without returning a value. Mainly, though, use async and futures.)
 
 ## Code Style
 
@@ -60,5 +60,8 @@ This is only tested with clang on OSX. All code should work in VS2013, as well.
 
 We tell the compiler to use C++14 so we can use std::make_unique, which (like many C++14 features) really just completes and adds consistency to things in C++11. Other than that, everything should compile fine with just C++11 (and much will with C++98).
 
-Currently, C++14 is called C++1y by the command-line version of Clang on OSX. In Xcode, you can set your "C++ Language Dialect" to C++14. In your build settings, it will look like the following:
+Currently, C++14 is called C++1y by the command-line version of Clang on OSX. That’s what we specify in our Makefile.
+
+In Xcode, you can set your "C++ Language Dialect" to C++14. In your build settings, it will look like the following:
+
 ![C++ Language Dialect Screenshot](https://cloud.githubusercontent.com/assets/81553/5036817/f7f51060-6b50-11e4-8f81-9f41fbabc23c.png)
