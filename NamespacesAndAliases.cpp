@@ -30,8 +30,7 @@ using namespace project;
 ///
 /// Test program showing destructor behavior.
 ///
-int main( int argc, char const *argv[] )
-{
+int main( int argc, char const *argv[] ) {
 
 	auto aggregate = DataAggregate( 1.0f, 2.0f );
 	auto agg2 = module::DataAggregate( 10.0f, "hello" );
@@ -40,20 +39,18 @@ int main( int argc, char const *argv[] )
 }
 
 // Define our constructor for the DataAggregate in the project namespace.
-project::DataAggregate::DataAggregate( float iOne, float iTwo ):
-	memberOne( iOne ),
+project::DataAggregate::DataAggregate( float iOne, float iTwo )
+:	memberOne( iOne ),
 	memberTwo( iTwo )
 {}
 
 // We can also re-open a namespace in the source file and put our definitions in it
 // in order to avoid the long chain of namespace::namespace:: specifications
-namespace project
-{
-namespace module
-{
+namespace project {
+namespace module {
 
-DataAggregate::DataAggregate( float iValue, const string &iName ):
-	value( iValue ),
+DataAggregate::DataAggregate( float iValue, const string &iName )
+:	value( iValue ),
 	name( iName )
 {}
 

@@ -18,12 +18,10 @@
 /// In general, we declare a namespace for the project we are working on.
 /// This prevents naming conflicts between different sections of our code.
 ///
-namespace project
-{
+namespace project {
 
 /// Create a data aggregate type in our project namespace.
-struct DataAggregate
-{
+struct DataAggregate {
 	DataAggregate() = default;
 	DataAggregate( float iOne, float iTwo );
 
@@ -38,8 +36,7 @@ struct DataAggregate
 /// You can reopen namespaces anywhere to add things to them.
 /// This is handy since you will often have several files contributing methods
 /// and class definitions to the same namespace.
-namespace project
-{
+namespace project {
 
 /// You can declare namespaces within other namespaces.
 /// Typically, we don't want to go more than two deep to avoid over-specifying things.
@@ -50,8 +47,7 @@ namespace project
 ///
 ///
 /// This namespace is project::module.
-namespace module
-{
+namespace module {
 	/// Create a data aggregate type in our module namespace.
 	struct DataAggregate
 	{
@@ -67,19 +63,15 @@ namespace module
 
 /// Looking forward to making this example less abstract,
 /// I am thinking about how to demonstrate breaking things into modules.
-namespace project
-{
+namespace project {
 
-namespace water
-{
-	struct Data
-	{
+namespace water {
+	struct Data {
 
 	};
 } // namespace water
 
-namespace wind
-{
+namespace wind {
 	/// For starters, just use the same data type as water.
 	/// If in the future we need a custom wind data type, we
 	/// could replace this alias with the custom type without needing
@@ -90,11 +82,9 @@ namespace wind
 	using Data = water::Data;
 } // namespace wind
 
-namespace soil
-{
+namespace soil {
 	/// Soil isn't simulated the same way as wind and water, so we have different data for it.
-	struct Data
-	{
+	struct Data {
 
 	};
 } // namespace soil
