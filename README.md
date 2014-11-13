@@ -7,7 +7,7 @@ Techniques shown are heavily inspired by Scott Meyer’s [Effective Cpp](http://
 
 We hope to cover enough of the content from those sources in a condensed format that makes it easy to jump in and be productive in a modern C++ project. Of course, we cannot cover the subject in as much depth or breadth as any of the sources mentioned above. Please see them if you are interested in more details.
 
-This is, as many things are, a work in progress.
+More samples will be added over time, and some may be removed or heavily modified as we think of clearer ways to explain the concepts.
 
 ## Building
 ```bash
@@ -21,10 +21,14 @@ $ ./SampleName.sample
 
 ## Current Samples:
 - Object Creation: creating C++ objects dynamically and on the stack.
-- Resource (Memory) Management: smart pointer types and managing resources (e.g. memory) with objects.
 - Namespaces and Aliases: organizing code into modules and writing readable names.
+- Templates: creating functions that can operate on many types.
 - Collections: sequential and key-based containers, with "CRUD" operations on their contents.
+- Functional: creating function objects (lambdas).
 - Async and Future: load and parse a file asynchronously and read the results back in the main thread.
+
+## Early Samples
+- Resource (Memory) Management: smart pointer types and managing resources (e.g. memory) with objects. Object Creation is probably a better sample for these concepts.
 
 ## Future Samples:
 - Threads and atomics (for continuously-running objects that process tasks without returning a value)
@@ -39,4 +43,5 @@ This is only tested with clang on OSX. All code should work in VS2013, as well.
 
 We tell the compiler to use C++14 so we can use std::make_unique, which (like many C++14 features) really just completes and adds consistency to things in C++11. Other than that, everything should compile fine with just C++11 (and much will with C++98).
 
-Currently, C++14 is called C++1y by Clang, as they are using the latest draft of the standard (which is yet to be finalized). Since we’re only using make_unique from it, there isn’t much to worry about.
+Currently, C++14 is called C++1y by the command-line version of Clang on OSX. In Xcode, you can set your "C++ Language Dialect" to C++14. In your build settings, it will look like the following:
+![C++ Language Dialect Screenshot](https://cloud.githubusercontent.com/assets/81553/5036817/f7f51060-6b50-11e4-8f81-9f41fbabc23c.png)
