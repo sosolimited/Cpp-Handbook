@@ -1,13 +1,12 @@
 
-# Effective Cpp Demos
+A Soso Tour of Modern C++
+=========================
 
-Compilable source files explaining common modern C++ techniques. Heavily commented source files are meant to explain the content, while running the programs may show “proof” of their stated behavior.
+Compilable source files explaining common modern C++ techniques. Heavily commented source files explain the techniques and show them in a practical format. Running the programs may show “proof” of their stated behavior.
 
-Techniques shown are heavily inspired by Scott Meyer’s [Effective Cpp](http://www.aristeia.com/books.html) books as well as Herb Sutter’s [Guru of the Week](http://herbsutter.com/gotw/). Additionally, the content Bjarne Stroustrup’s [A Tour of C++](http://www.stroustrup.com/Tour.html) is essential.
+These programs are not meant to exhaustively document what you can do with C++. Instead, they aim to show a subset of the language that is simple, productive, and--yes--even fun to work with.
 
-We hope to cover enough of the content from those sources in a condensed format that makes it easy to jump in and be productive in a modern C++ project. Of course, we cannot cover the subject in as much depth or breadth as any of the sources mentioned above. Please see them if you are interested in more details.
-
-More samples will be added over time, and some may be removed or heavily modified as we think of clearer ways to explain the concepts.
+Have a read through the source files. Build and run the sample applications. Try changing some pieces to see how it changes the program behavior.
 
 ## Building
 ```bash
@@ -19,7 +18,7 @@ $ make all
 $ ./SampleName.sample
 ```
 
-## Current Samples:
+## The Samples:
 
 The samples are loosely ordered. The sequence laid out below will hopefully make the most sense if you don't know where to start.
 
@@ -30,15 +29,30 @@ The samples are loosely ordered. The sequence laid out below will hopefully make
 - Collections: sequential and key-based containers, with "CRUD" operations on their contents.
 - Async and Future: load and parse a file asynchronously and read the results back in the main thread.
 
-## Early Samples
+### Early Samples
 - Resource (Memory) Management: smart pointer types and managing resources (e.g. memory) with objects. Object Creation is probably a better sample for these concepts.
 
-## Future Samples:
+### Forthcoming? Samples:
 - Threads and atomics (for continuously-running objects that process tasks without returning a value)
 
 ## Code Style
 
 This being a Sosolimited project, we follow the company code conventions throughout. We use 2-space tabs, so you might need to adjust your editor settings for everything to line up nicely.
+
+## Further Reading
+
+The techniques shown here are largely influenced by Scott Meyer’s [Effective Cpp](http://www.aristeia.com/books.html) books as well as Herb Sutter’s [Guru of the Week](http://herbsutter.com/gotw/) column. Additionally, Bjarne Stroustrup’s recent [A Tour of C++](http://www.stroustrup.com/Tour.html) was influential in setting the tone of the samples. If you are interested in learning more in breadth and/or depth, have a look at those sources.
+
+If you want to learn more, start here:
+- [A Tour of C++](http://www.stroustrup.com/Tour.html)
+- [Guru of the Week](http://herbsutter.com/gotw/)
+- [Effective Modern C++](http://shop.oreilly.com/product/0636920033707.do)
+
+If you just want function references, see:
+- [MSDN C++ Reference](http://msdn.microsoft.com/en-us/library/3bstk3k5.aspx)
+- [MSDN C++ Standard Library Reference](http://msdn.microsoft.com/en-us/library/cscc687y.aspx)
+- [cplusplus.com](http://www.cplusplus.com/reference/)
+- [cppreference.com](http://en.cppreference.com/w/)
 
 ## C++ Versions and Compatibility
 
