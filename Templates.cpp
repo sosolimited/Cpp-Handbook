@@ -38,11 +38,13 @@ int main() {
 	// Since the types of the start and collection parameters match below,
 	// the compiler can figure out the rest.
 	cout << "Integers: " << accumulate( 0, integers ) << endl;
-	cout << "Floats: " << accumulate( 0.0f, floats ) << endl;
-	cout << "Doubles: " << accumulate( 0.0, doubles ) << endl;
+	cout << "Floats:   " << accumulate( 0.0f, floats ) << endl;
+	cout << "Doubles:  " << accumulate( 0.0, doubles ) << endl;
 
 	// Often, the compiler may not be able to deduce all the template types from the
 	// arguments to your method. In those cases, you can help it along by filling in
-	// the template parameters yourself. Template parameters are passed in angle-brackets, <>
-	cout << "Integers with float start: " << accumulate<int>( 1.0f, integers ) << endl;
+	// the template parameters yourself.
+	// Template parameters are passed in angle-brackets, <>
+	int total = accumulate<int>( 1.0f, integers );
+	cout << "Total:    " << total << endl;
 }
