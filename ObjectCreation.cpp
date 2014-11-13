@@ -115,13 +115,19 @@ void createDynamicObjects() {
 	// automatically manages the memory (de)allocation of the dynamic object.
 
 	// Here we create two shared_ptr objects.
-	// shared_ptr's are our bread-and-butter for polymorphism and dynamic allocations.
+	// shared_ptr's are our bread-and-butter for shared objects.
 	auto base = make_shared<BaseObject>( "Dynamic A" );
 	auto derived = make_shared<DerivedObject>( "Dynamic B" );
 
-	// Unique pointers are more efficient than shared_ptrs, but they cannot be copied.
-	// Use them if you need run-time polymorphism, but only manage the object from one place.
+	// Unique pointers are more efficient than shared_ptrs, since they can only have one owner.
+	// They are our default type for run-time polymorphism, so long as the object only has one owner.
 	auto unique = make_unique<DerivedObject>( "Dynamic C" );
+
+	// If a unique_ptr needs to change ownership, you can move the object.
+	// Note that once moved, the original object is immediately invalid and should never be used again.
+	auto temp_unique = make_unique<DerivedObject>( "Dynamic D" );
+	// unique_owner is now the sole owner of the DerivedObject previously pointed to by temp_unique.
+	auto unique_owner = std::move( temp_unique );
 
 	cout << endl;
 	cout << "Using objects" << endl;
@@ -129,6 +135,7 @@ void createDynamicObjects() {
 	// Then we can pass it to our const T& functions like any stack-allocated object of the same type.
 	useObject( *base );
 	useObject( *unique );
+	useObject( *unique_owner );
 
 	cout << endl;
 	cout << "Copying shared_ptr<DerivedObject> into shared_ptr<BaseObject>" << endl;
