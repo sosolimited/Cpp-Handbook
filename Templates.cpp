@@ -27,9 +27,9 @@ T accumulate( T start, const std::vector<T> &collection ) {
 }
 
 int main() {
-
 	// The STL, or standard template library, uses templates extensively to provide
 	// containers and algorithms that work with any type.
+	// Here, we use STL vectors to hold collections of different built-in types.
 	std::vector<int> integers = { 1, 2, 3, 4, 5, 12 };
 	std::vector<float> floats = { 1.5f, 2.0f, 33.3f };
 	std::vector<double> doubles = { 1.2, 3.3, 4.4, 6.6, 9.12 };
