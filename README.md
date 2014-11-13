@@ -20,11 +20,14 @@ $ ./SampleName.sample
 ```
 
 ## Current Samples:
+
+The samples are loosely ordered. The sequence laid out below will hopefully make the most sense if you don't know where to start.
+
 - Object Creation: creating C++ objects dynamically and on the stack.
 - Namespaces and Aliases: organizing code into modules and writing readable names.
 - Templates: creating functions that can operate on many types.
-- Collections: sequential and key-based containers, with "CRUD" operations on their contents.
 - Functional: creating function objects (lambdas).
+- Collections: sequential and key-based containers, with "CRUD" operations on their contents.
 - Async and Future: load and parse a file asynchronously and read the results back in the main thread.
 
 ## Early Samples
