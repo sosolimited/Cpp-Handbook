@@ -29,6 +29,10 @@ The samples are loosely ordered. If you don't how what you want to look at, go t
 - __Collections__: sequential and key-based containers, with "CRUD" operations on their contents.
 - __Async and Future__: load and parse a file asynchronously and read the results back in the main thread.
 
+### Sample Layout
+
+The samples are generally organized in four sections. First, there is a comment explaining what we will do in the sample. Second, we have the functions that do the work with additional detail in comments. Third, the main function calls the functions (sometimes, the second section just lives within the main function). Finally, any implementation details that aren't particularly relevant to the sample are defined after main().
+
 ### Early Samples
 - __Resource Management__: smart pointer types and managing resources (e.g. memory) with objects. Object Creation is probably a better sample for these concepts.
 
@@ -38,6 +42,8 @@ The samples are loosely ordered. If you don't how what you want to look at, go t
 ## Code Style
 
 This being a Sosolimited project, we follow the company code conventions throughout. We use 2-space tabs, so you might need to adjust your editor settings for everything to line up nicely.
+
+View the [Soso C++ Style Guide](STYLE.md?ts=2).
 
 ## Further Reading
 
