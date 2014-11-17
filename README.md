@@ -43,7 +43,7 @@ The samples are generally organized in four sections. First, there is a comment 
 
 This being a Sosolimited project, we follow the company code conventions throughout. We use 2-space tabs, so you might need to adjust your editor settings for everything to line up nicely.
 
-View the [Soso C++ Style Guide](STYLE.md?ts=2).
+View the [Soso C++ Style Guide](STYLE.md).
 
 ## Further Reading
 
