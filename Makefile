@@ -1,4 +1,4 @@
-FLAGS := -std=c++1y -stdlib=libc++
+FLAGS := -std=c++1y -stdlib=libc++ -Wall
 CPP_FILES := $(wildcard *.cpp)
 SAMPLES := $(CPP_FILES:.cpp=.sample)
 
