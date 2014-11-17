@@ -23,7 +23,8 @@ using namespace std;
 std::vector<float>			numberVector;
 
 // Maps are the de-facto associative container.
-// (They are actually stored as trees)
+// They are actually stored as trees, so if you want a hash-based (or true) map,
+// you can use std::unordered_map.
 std::map<string, float>	numberMap;
 
 // Unordered Maps are true maps, so key-based lookup should be faster than std::map.
@@ -188,6 +189,82 @@ void mapRemoval() {
 	}
 }
 
+void sortingAndConversion() {
+	// Create a map of words to "counts"
+	// We will copy this map into a vector so we can use some STL algorithms
+	// on the data, particularly sorting.
+	map<std::string, int> wordCountMap = { {"rabbit", 4},
+		{"hare", 3},
+		{"bunny", 7},
+		{"coney", 12},
+		{"duck", 3}
+	};
+
+	// Create a vector that contains (string, int) pairs to hold data from the map.
+	// Make an alias for std::pair<std::string, int>, because that is wild to read.
+	using WordCount = std::pair<std::string, int>;
+	vector<WordCount>	wordCounts;
+
+	// Assign the word map data to our word counts.
+	// This replaces any existing data in the vector.
+	wordCounts.assign( wordCountMap.begin(), wordCountMap.end() );
+	// Add the contents of wordCounts() to the end of our vector.
+	// We are adding to the end so we can have duplicates to remove later.
+	wordCounts.insert( wordCounts.end(), wordCountMap.begin(), wordCountMap.end() );
+
+	// Print our results
+	cout << "Map contents copied to vector (twice)" << endl;
+	for( auto &p : wordCounts ) {
+		cout << p.first << ": " << p.second << ", ";
+	}
+	cout << endl;
+
+	// When sorting with the STL, you provide the range that you want to sort.
+	// If it can, the STL will figure out some kind of default sorting.
+	std::sort( wordCounts.begin(), wordCounts.end() );
+
+	cout << "Default-sorted vector contents" << endl;
+	for( auto &p : wordCounts ) {
+		cout << p.first << ": " << p.second << ", ";
+	}
+	cout << endl;
+
+	// Now that the vector is sorted, we can remove duplicates if we want to.
+	// Like most removal operations, this is in two steps.
+	// First we arrange the elements so that the duplicates are at the end of the array.
+	// The std::unique() algorithm moves all duplicates to the end and returns the "end"
+	// of the range of unique elements.
+	auto duplicate_begin = std::unique( wordCounts.begin(), wordCounts.end() );
+	// Now we erase all the duplicate elements from the end of the vector.
+	wordCounts.erase( duplicate_begin, wordCounts.end() );
+
+	cout << "Unique vector contents" << endl;
+	for( auto &p : wordCounts ) {
+		cout << p.first << ": " << p.second << ", ";
+	}
+	cout << endl;
+
+	// You can provide a comparator function for std::sort to tell it how to sort elements.
+	// We opt to provide our comparator as a lambda.
+	// The comparator should return true if the lhs element should precede the rhs element.
+	// See http://www.cplusplus.com/reference/algorithm/sort/ for more.
+	//
+	// We use the stable_sort() function here, an alternative to sort().
+	// When elements are equivalent, stable_sort() doesn't change the order in which they appear.
+	// Surprisingly, it is also comparable to or faster than sort in speed.
+	std::stable_sort( wordCounts.begin(), wordCounts.end(), [] (const WordCount &lhs, const WordCount &rhs) {
+		// We want the biggest numbers first,
+		// so we return whether the lhs element is greater than the rhs element.
+		return lhs.second > rhs.second;
+	} );
+
+	cout << "Numerically sorted (non-ascending)" << endl;
+	for( auto &p : wordCounts ) {
+		cout << p.first << ": " << p.second << ", ";
+	}
+	cout << endl;
+}
+
 int main() {
 	cout << endl;
 	cout << "Sequential Containers" << endl;
@@ -206,4 +283,9 @@ int main() {
 	cout << endl;
 	cout << "Removing elements" << endl;
 	mapRemoval();
+
+	cout << endl;
+	cout << "Sorting Elements and Copying between Container Types" << endl;
+	cout << "====================================================" << endl;
+	sortingAndConversion();
 }
