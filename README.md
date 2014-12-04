@@ -2,11 +2,13 @@
 A Soso Tour of Modern C++
 =========================
 
-Compilable source files explaining common modern C++ techniques. Heavily commented source files explain the techniques and show them in a practical format. Running the programs may show “proof” of their stated behavior.
+A high-level tour of C++ including compilable source files demonstrating common modern C++ concepts.
+
+Heavily commented source files explain the concepts and show them in a practical format. Running the programs may show “proof” of their stated behavior.
 
 These programs are not meant to exhaustively document what you can do with C++. Instead, they aim to show a subset of the language that is simple, productive, and--yes--even fun to work with.
 
-Have a read through the source files. Build and run the sample applications. Try changing some pieces to see how it changes the program behavior.
+Read through [The Tour](Cpp-Tour.md), and have a read through the source files. Build and run the sample applications. Try changing some code to see how it changes the program behavior.
 
 ## Building
 ```bash
