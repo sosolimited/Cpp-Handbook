@@ -1,26 +1,39 @@
 A Soso Tour of Cpp
 ==================
 
+This document outlines some core C++ concepts from a high level. Compilable source files demonstrating the concepts accompany each category, and can be built using the instructions in the [Readme](README.md).
+
+**Table of Contents**
+- [Object Creation](#)
+- [Namespaces and Aliases](#)
+- [Templates](#)
+- [Functional Programming (Lambdas)](#)
+- [Collections](#)
+	- [Sequential Containers](#)
+	- [Associative Containers](#)
+- [Asynchronous Programming](#)
+	- [Futures](#)
+	- [Threads](#)
 
 Object Creation
 ---------------
-[Source](ObjectCreation.cpp)
+[Compilable Source](ObjectCreation.cpp?ts=2)
 
 Namespaces and Aliases
 ----------------------
-[Source](NamespacesAndAliases.cpp?ts=2)
+[Compilable Source](NamespacesAndAliases.cpp?ts=2)
 
 Templates
 ---------
-[Source](Templates.cpp)
+[Compilable Source](Templates.cpp?ts=2)
 
 Functional Programming (Lambdas)
 --------------------------------
-[Source](Functional.cpp)
+[Compilable Source](Functional.cpp?ts=2)
 
 Collections
 -----------
-[Source](Collections.cpp)
+[Compilable Source](Collections.cpp?ts=2)
 
 C++ provides a large number of container types in the STL.
 
@@ -38,7 +51,7 @@ Asynchronous Programming
 ------------------------
 
 ### Futures
-[Source](AsyncAndFuture.cpp)
+[Compilable Source](AsyncAndFuture.cpp?ts=2)
 
 `std::future<Type>` will eventually hold a value of type Type. When it is ready, you can access the value.
 
