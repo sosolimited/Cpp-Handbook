@@ -15,6 +15,11 @@ using namespace std;
 /// They can capture variables from the current scope, do any work you want,
 /// and call other functions.
 ///
+/// One way to think about how lambdas are related to functions is as follows:
+/// Functions receive parameters when you call them.
+/// Lambdas receive arguments when you create them, and return a Function.
+/// The creation-time arguments for lambdas are passed in the initial brackets [].
+///
 
 ///
 /// Define a few functions with different method signatures.
