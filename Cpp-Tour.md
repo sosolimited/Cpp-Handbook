@@ -164,7 +164,7 @@ if( lerp_fn ) {
 }
 ```
 
-### Lambdas (`[] () {}`)
+### Lambdas (\[] () {})
 
 Lambda expressions produce function objects.
 
@@ -203,26 +203,149 @@ Collections
 
 C++ provides a large number of container types in the STL.
 
+The container interface is very similar across types, though certain containers only implement parts of the interface.
+
+Some common methods include:
+- `size()`  - returns how many elements the collection contains.
+- `empty()` - returns true if the collection is empty.
+- `clear()` - removes everything from the collection.
+- `erase()` - removes a range of elements from the collection.
+- `assign()` - replace the contents of the collection with an element or range.
+- `insert()` - add an element or range to the collection at a specified position.
+- `at()` - returns the element at the specified index or key.
+
 ### Sequential Containers
 
+#### Vector
 `std::vector<Type>`
+
+Vectors are the go-to sequential container. They can store a variable number of elements and provide fast iteration and index-based lookup.
+
+Vectors store their contents in a contiguous block of memory and resize themselves as needed. When a vector is resized, it copies the old contents to a new block of memory.
+
+Due to the way it is laid out, we typically only modify the end of a vector.
+
+```c++
+vector<float> numbers;
+numbers.push_back( 10.0f );
+numbers.push_back( 0.5f );
+```
+
+#### Array
 `std::array<Type, Size>`
+
+Arrays store a fixed number of elements. In contrast to a C array, C++’s array type knows how long it is.
+
+```c++
+std::array<float, 5> array;
+array.at( 4 ) = 10.0f;
+```
+
+#### List
 `std::list<Type>`
+
+If you frequently need to modify the front of a container, consider using a std::list. It is implemented as a doubly-linked-list, which makes it cheap to change at arbitrary positions, but it is comparatively slow for iteration and index-based lookup compared to std::vector.
 
 ### Associative Containers
 
+Associative containers let you look up contents by a key other than their index (and may not have an index). The data is associated with a key of your choosing.
+
+Common methods:
+- `count()` - returns the number of times the key appears in the collection. (0 or 1 for the containers we use.)
+- `find()` - returns the iterator for the key/value pair in the collection. (collection::end() if not found)
+
+#### Map
 `std::map<Key, Value>`
+
+A map stores key-value pairs, allowing you to look up contents by a key other than an index. Maps are stored as a tree structure.
+
+```c++
+std::map<std::string, float> numbers;
+numbers["five"] = 5.0f;
+numbers.insert( make_pair( "ten", 10.0f ) );
+
+float val = numbers.at( "five" );
+```
+
+#### Unordered Map
+`std::unordered_map<Key, Value>`
+
+An unordered_map is a map structure that is implemented using a hash table. With large collections, it will generally be faster to look up elements in an unordered_map than a map.
+
+You use unordered_maps the same way you use maps.
+
+#### Set
+`std::set<Key>`
+
+A set is a collection that guarantees each value it contains will only be stored once. They are useful for keeping track of things like selections a user made or possible next moves in a game.
 
 Asynchronous Programming
 ------------------------
 
+There are many approaches to and reasons for asynchronous programming. Generally, we use asynchronous handling when we want to get some big chunk of work done, but need to keep our animations running smoothly and UI responsive while it happens.
+
 ### Futures
 [Compilable Source](AsyncAndFuture.cpp?ts=2)
 
-`std::future<Type>` will eventually hold a value of type Type. When it is ready, you can access the value.
+`std::async` runs a function in parallel with your current code. It returns a `future` that you can use to check on the progress of the function.
 
-Futures are returned from calls to std::async.
+In addition to letting you check whether your asynchronous function has completed, futures let you get the return value of the function when it is complete.
+
+```c++
+// Create a function that will do the work we want.
+auto load_and_parse_file = [path] () {
+  // pretend this does something...
+  return file_contents;
+};
+
+// Run our function asynchronously.
+future<Contents> data = std::async( std::launch::async, load_and_parse_file );
+
+// Time passes as we do something else...
+
+// Check in on our data.
+if( data.valid() ) {
+  auto status = data.wait_for( 1ns );
+  // If we are all done here,
+  if( status == std::future_status::ready ) {
+    // Use our data.
+    Contents c = data.get();
+  }
+}
+```
+
+Note that you must store the future returned by std::async if you want the code to actually run asynchronously. This is true even if you don't care about the return value.
 
 ### Threads
 
-C++11 provides a std::thread object that executes a function in parallel to the main thread. If you want to have a continuously running process with minimal communication back to the main thread, it can make sense to use a thread. If you want to do some work in parallel to your main thread and get the result back, it usually makes more sense to use a std::future.
+C++11 provides a std::thread object that executes a function in parallel to the main thread. If you want to have a continuously running process with minimal communication back to the main thread, it can make sense to use a thread.
+
+If you want to do some work in parallel to your main thread and get the result back, it usually makes more sense to use a std::future.
+
+```c++
+std::thread t;
+t = std::thread( some_function );
+```
+
+If you want to share data between threads, you must protect it with a mutex wherever it is used to avoid race conditions.
+
+```c++
+std::mutex dataMutex;
+DataType   data;
+
+// Returns a copy of data.
+// Lock to make sure data doesn't change during copy.
+DataType getData() {
+  std::lock_guard lock( dataMutex );
+  return data;
+}
+
+// Change a member of data.
+// Lock to make sure nothing else changes data until after we finish.
+void changeDataMember( float iA ) {
+  std::lock_guard lock( dataMutex );
+  data.a = iA;
+}
+```
+
+Threads can be useful, but if you are returning data from a parallel process, try using std::async first. Not only do futures reduce the chances for race conditions, they also enable you to control the re-entry point for asynchronous code.
