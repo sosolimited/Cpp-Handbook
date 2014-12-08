@@ -3,6 +3,8 @@ A Soso Tour of Cpp
 
 This document outlines some core C++ concepts from a high level. Compilable source files demonstrating the concepts accompany each category, and can be built using the instructions in the [Readme](README.md).
 
+This is not meant to exhaustively document what you can do with C++. Instead, we aim to show a subset of the language that is simple, productive, and--yes--even fun to work with.
+
 **Table of Contents**
 - [Object Creation](#user-content-object-creation)
 - [Types and Polymorphism](#user-content-types-and-polymorphism)

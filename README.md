@@ -1,12 +1,11 @@
 
-A Soso Tour of Modern C++
-=========================
+Soso C++ Handbook
+=================
 
-A high-level tour of C++ including compilable source files demonstrating common modern C++ concepts.
-
-Heavily commented source files explain the concepts and show them in a practical format. Running the programs may show “proof” of their stated behavior.
-
-These programs are not meant to exhaustively document what you can do with C++. Instead, they aim to show a subset of the language that is simple, productive, and--yes--even fun to work with.
+**Table of Contents**
+- [A Soso Tour of Cpp](Cpp-Tour.md)
+- [Code Style](STYLE.md)
+- [Samples](#user-content-the-samples)
 
 Read through [The Tour](Cpp-Tour.md), and have a read through the source files. Build and run the sample applications. Try changing some code to see how it changes the program behavior.
 
@@ -33,7 +32,7 @@ $ make all
 $ ./SampleName.sample
 ```
 
-### Sample Layout
+### Sample Code Layout
 
 The samples are generally organized in four sections. First, there is a comment explaining what we will do in the sample. Second, we have the functions that do the work with additional detail in comments. Third, the main function calls the functions (sometimes, the second section just lives within the main function). Finally, any implementation details that aren't particularly relevant to the sample are defined after main().
 
@@ -49,8 +48,8 @@ This is only tested with clang on OSX. All code should work in VS2013, as well.
 
 We tell the compiler to use C++14 so we can use std::make_unique, which (like many C++14 features) really just completes and adds consistency to things in C++11. Other than that, everything should compile fine with just C++11 (and much will with C++98).
 
-Currently, C++14 is called C++1y by the command-line version of Clang on OSX. That’s what we specify in our Makefile.
+Currently, C++14 is called C++1y by the command-line version of Clang on OSX. We specify that flag in the Makefile.
 
-In Xcode, you can set your "C++ Language Dialect" to C++14. In your build settings, it will look like the following:
+In Xcode, you can set your “C++ Language Dialect” to C++14. In your build settings, it will look like the following:
 
 ![C++ Language Dialect Screenshot](https://cloud.githubusercontent.com/assets/81553/5036817/f7f51060-6b50-11e4-8f81-9f41fbabc23c.png)
