@@ -1,15 +1,13 @@
 Soso C++ Style
 ==============
 
-## Our Style
+Derived from [Soso C++](https://docs.google.com/a/sosolimited.com/document/d/1tcOoIWlAf2IMTu2caApXgI9-pp09pMvNEp0b2y8s8b4). Discussions or changes to the style may happen in the future.
 
-Copied from [Soso C++](https://docs.google.com/a/sosolimited.com/document/d/1tcOoIWlAf2IMTu2caApXgI9-pp09pMvNEp0b2y8s8b4). Discussions or changes to the style may happen in the future.
+## Indentation
 
-### Indentation
+Use tabs, 2-spaces wide. Note that this markdown document is indented with spaces, since it is (currently) not possible to tell github to change the tab width of code snippets inside markdown files.
 
-Use tabs, 2-spaces wide. Note that this document is indented with spaces, since it is (currently) not possible to tell github to change the tab width of code snippets in markdown files.
-
-### Variable naming
+## Variable naming
 
 Member variables don't use prefixes, and are written with initialCapitals (camelCase).
 
@@ -40,9 +38,9 @@ void Class::addToValue( float iValue ) {
 ```
 
 
-### Braces
+## Braces
 
-Braces always open on the same line, except in constructors with initializer lists. We also write javascript, where braces (practically) must open on the same line, and having consistency across languages is nice.
+Braces generally open on the same line, except in constructors with initializer lists. We also write javascript, where braces (practically) must open on the same line, and having consistency across languages is nice.
 
 ```c++
 namespace example {
@@ -77,10 +75,9 @@ float Thing::method() const {
 } // namespace example
 ```
 
-### Comments
+## Comments
 
-Use only single-line comments ("//"). If your comment spans multiple lines, comment out each line
-individually.
+Use only single-line comments `//` to document code. If your comment spans multiple lines, comment out each line individually.
 
 For inline comments, use `//`, for documentation comments (e.g. of class and method declarations), use `///`. The extra slash is a hint to Doxygen and other documentation tools.
 
