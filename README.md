@@ -12,9 +12,16 @@ Read through [The Tour](Cpp-Tour.md), and have a read through the source files. 
 
 ## The Samples
 
-### Building
-
 The samples are loosely ordered. If you don't how what you want to look at, read through [The Tour](Cpp-Tour.md) and run the samples for the sections that need more clarification.
+
+- __Object Creation__: creating C++ objects dynamically and on the stack.
+- __Namespaces and Aliases__: organizing code into modules and writing readable names.
+- __Templates__: creating functions that can operate on many types.
+- __Functional__: creating function objects (lambdas).
+- __Collections__: sequential and key-based containers, with "CRUD" operations on their contents.
+- __Async and Future__: load and parse a file asynchronously and read the results back in the main thread.
+
+### Building
 
 ```bash
 $ make all
@@ -25,13 +32,6 @@ $ make all
 ```bash
 $ ./SampleName.sample
 ```
-
-- __Object Creation__: creating C++ objects dynamically and on the stack.
-- __Namespaces and Aliases__: organizing code into modules and writing readable names.
-- __Templates__: creating functions that can operate on many types.
-- __Functional__: creating function objects (lambdas).
-- __Collections__: sequential and key-based containers, with "CRUD" operations on their contents.
-- __Async and Future__: load and parse a file asynchronously and read the results back in the main thread.
 
 ### Sample Layout
 
