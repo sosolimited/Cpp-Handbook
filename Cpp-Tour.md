@@ -5,6 +5,7 @@ This document outlines some core C++ concepts from a high level. Compilable sour
 
 **Table of Contents**
 - [Object Creation](#user-content-object-creation)
+- [Types and Polymorphism](#user-content-types-and-polymorphism)
 - [Namespaces and Aliases](#user-content-namespaces-and-aliases)
 - [Templates](#user-content-templates)
 - [Functional Programming](#user-content-functional-programming)
@@ -19,7 +20,7 @@ Objects can live in two main places: on the stack, or in dynamic memory. Objects
 
 ### Stack Objects
 
-Objects that live on the stack are declared simply by type and name. They live for as long as the scope in which they are declared. That could be the body of a function, the lifetime of the parent class instance, or the block of a for-loop.
+Objects that live on the stack are declared simply by type and name. They live for as long as the scope in which they are declared. That scope could be the body of a function, the lifetime of the parent class instance, or the block of a for-loop.
 
 Stack allocation is the preferred way to store your variables as it is simple and does the right thing. It looks like the following:
 
@@ -61,6 +62,69 @@ auto objectURef = std::make_unique<Object>();
 
 Since the dynamic memory `Object` in the above code is managed by a stack-allocated pointer object, we know the dynamic memory will be freed when our pointer object falls out of scope.
 
+Types and Polymorphism
+----------------------
+
+C++ provides a large number of built-in data types. You can also create your own data types as structs or classes.
+
+### Structs
+
+Structs are useful for holding plain old data. Their members are public by default.
+
+```c++
+// Data holds a number of pieces of public data.
+struct Data {
+  int         member;
+  int         another;
+  std::string name;
+};
+```
+
+### Classes
+
+Classes are used when objects should have more functionality than simply holding data. Their members are private by default.
+
+Data in a class can be given a default initial value in the declaration. For built-in numeric types, we provide default values in order to avoid bugs from uninitialized data.
+
+```c++
+// Create a class named Type.
+class Type {
+public:
+  void doSomething();
+
+private:
+  // Data members are declared private.
+  int   someMember = 10;
+  float another = 5.0f;
+};
+
+// Create an object of type Type.
+Type thing;
+```
+
+### Inheritance
+
+Classes and structs can inherit from other classes. Base classes should have a virtual destructor. Any methods that the derived class can override must be marked as `virtual` in the base class and with `override` in the derived class.
+
+```c++
+// Base class has some virtual methods, and a virtual destructor.
+class Base {
+public:
+  // Mark destructor as virtual so derived destructors get called.
+  virtual ~Base() = default;
+  // draw() can be overridden since it is virtual.
+  virtual void draw() const;
+  // doSomething() cannot be overriden, since it is not virtual.
+  void doSomething();
+};
+
+// Derived inherits the public interface from Base
+class Derived : public Base {
+public:
+  // virtual method that is overridden is marked with override.
+  void draw() const override;
+};
+```
 
 Namespaces and Aliases
 ----------------------
@@ -86,7 +150,7 @@ namespace project {
 
 And access members in the namespace as follows:
 
-In a header file:
+In a header file (.h):
 ```c++
 project::function();
 ```
@@ -168,7 +232,7 @@ if( lerp_fn ) {
 
 Lambda expressions produce function objects.
 
-Lambdas are closely related to functions. Functions receive parameters when they are called; Lambdas receive set of parameters when you create them, and return a function.
+Lambdas are closely related to functions. Functions receive parameters when they are called; Lambdas receive parameters when you create them, and return a function.
 
 Lambda syntax varies a bit from other functions. It begins with the capture block `[]` which is where you pass parameters to the lambda. Following that is the familiar `()` of a function, where you declare the parameters that the resulting function will receive. Finally, the familiar function block `{}` contains the code the function will run.
 
@@ -284,7 +348,9 @@ Asynchronous Programming
 
 There are many approaches to and reasons for asynchronous programming. Generally, we use asynchronous handling when we want to get some big chunk of work done, but need to keep our animations running smoothly and UI responsive while it happens.
 
-### Futures
+C++ constructs for enabling asynchronous programming include `async` calls with `futures`, and `threads` with `atomics` and `mutexes`. Futures and async not only reduce the chances for race conditions, they also enable you to control the re-entry point for asynchronous code. Threads are useful for continuously-running functions, and especially when you don't need results from the function back on the main thread.
+
+### Async and Future
 [Compilable Source](AsyncAndFuture.cpp?ts=2)
 
 `std::async` runs a function in parallel with your current code. It returns a `future` that you can use to check on the progress of the function.
@@ -292,14 +358,8 @@ There are many approaches to and reasons for asynchronous programming. Generally
 In addition to letting you check whether your asynchronous function has completed, futures let you get the return value of the function when it is complete.
 
 ```c++
-// Create a function that will do the work we want.
-auto load_and_parse_file = [path] () {
-  // pretend this does something...
-  return file_contents;
-};
-
-// Run our function asynchronously.
-future<Contents> data = std::async( std::launch::async, load_and_parse_file );
+// Run a function asynchronously.
+std::future<string> data = std::async( std::launch::async, some_function );
 
 // Time passes as we do something else...
 
@@ -309,7 +369,7 @@ if( data.valid() ) {
   // If we are all done here,
   if( status == std::future_status::ready ) {
     // Use our data.
-    Contents c = data.get();
+    string c = data.get();
   }
 }
 ```
@@ -327,7 +387,19 @@ std::thread t;
 t = std::thread( some_function );
 ```
 
-If you want to share data between threads, you must protect it with a mutex wherever it is used to avoid race conditions.
+If you want to share data between threads, you need to synchronize it using some means. C++ provides two options for synchronizing data: the `std::atomic<>` template and `std::mutex`.
+
+#### Atomic
+
+Atomic operations cannot be divided into multiple steps, which makes them safe to use across multiple threads. The std::atomic template wraps a piece of data so that operations on that data are atomic.
+
+```c++
+std::atomic<float> sharedData;
+```
+
+#### Mutex
+
+Mutexes can be used to protect data as well. Only one thread can lock a mutex at a time, so content correctly protected by a mutex can be safe to share between threads.
 
 ```c++
 std::mutex dataMutex;
@@ -348,4 +420,18 @@ void changeDataMember( float iA ) {
 }
 ```
 
-Threads can be useful, but if you are returning data from a parallel process, try using std::async first. Not only do futures reduce the chances for race conditions, they also enable you to control the re-entry point for asynchronous code.
+Where to go from here
+---------------------
+
+The concepts shown above and in the sample code are informed by Scott Meyer’s [Effective Cpp](http://www.aristeia.com/books.html) books as well as Herb Sutter’s [Guru of the Week](http://herbsutter.com/gotw/) column. Additionally, Bjarne Stroustrup’s recent [A Tour of C++](http://www.stroustrup.com/Tour.html) was influential in setting the tone of the samples. If you are interested in learning more in breadth and/or depth, have a look at those sources.
+
+For more breadth and depth, start here:
+- [A Tour of C++](http://www.stroustrup.com/Tour.html)
+- [Guru of the Week](http://herbsutter.com/gotw/)
+- [Effective Modern C++](http://shop.oreilly.com/product/0636920033707.do)
+
+For detailed reference materials, start here:
+- [MSDN C++ Reference](http://msdn.microsoft.com/en-us/library/3bstk3k5.aspx)
+- [MSDN C++ Standard Library Reference](http://msdn.microsoft.com/en-us/library/cscc687y.aspx)
+- [cplusplus.com](http://www.cplusplus.com/reference/)
+- [cppreference.com](http://en.cppreference.com/w/)

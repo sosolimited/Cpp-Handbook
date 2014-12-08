@@ -10,19 +10,21 @@ These programs are not meant to exhaustively document what you can do with C++. 
 
 Read through [The Tour](Cpp-Tour.md), and have a read through the source files. Build and run the sample applications. Try changing some code to see how it changes the program behavior.
 
-## Building
+## The Samples
+
+### Building
+
+The samples are loosely ordered. If you don't how what you want to look at, read through [The Tour](Cpp-Tour.md) and run the samples for the sections that need more clarification.
+
 ```bash
 $ make all
 ```
 
-## Running
+### Running
+
 ```bash
 $ ./SampleName.sample
 ```
-
-## The Samples:
-
-The samples are loosely ordered. If you don't how what you want to look at, go through the samples in the order shown below.
 
 - __Object Creation__: creating C++ objects dynamically and on the stack.
 - __Namespaces and Aliases__: organizing code into modules and writing readable names.
@@ -35,32 +37,11 @@ The samples are loosely ordered. If you don't how what you want to look at, go t
 
 The samples are generally organized in four sections. First, there is a comment explaining what we will do in the sample. Second, we have the functions that do the work with additional detail in comments. Third, the main function calls the functions (sometimes, the second section just lives within the main function). Finally, any implementation details that aren't particularly relevant to the sample are defined after main().
 
-### Early Samples
-- __Resource Management__: smart pointer types and managing resources (e.g. memory) with objects. Object Creation is probably a better sample for these concepts.
-
-### Forthcoming? Samples:
-- __Threads and Atomics__ (for continuously-running objects that process tasks without returning a value. Mainly, though, use async and futures.)
-
 ## Code Style
 
 This being a Sosolimited project, we follow the company code conventions throughout. We use 2-space tabs, so you might need to adjust your editor settings for everything to line up nicely.
 
 View the [Soso C++ Style Guide](STYLE.md).
-
-## Further Reading
-
-The techniques shown here are largely influenced by Scott Meyer’s [Effective Cpp](http://www.aristeia.com/books.html) books as well as Herb Sutter’s [Guru of the Week](http://herbsutter.com/gotw/) column. Additionally, Bjarne Stroustrup’s recent [A Tour of C++](http://www.stroustrup.com/Tour.html) was influential in setting the tone of the samples. If you are interested in learning more in breadth and/or depth, have a look at those sources.
-
-If you want to learn more, start here:
-- [A Tour of C++](http://www.stroustrup.com/Tour.html)
-- [Guru of the Week](http://herbsutter.com/gotw/)
-- [Effective Modern C++](http://shop.oreilly.com/product/0636920033707.do)
-
-If you just want function references, see:
-- [MSDN C++ Reference](http://msdn.microsoft.com/en-us/library/3bstk3k5.aspx)
-- [MSDN C++ Standard Library Reference](http://msdn.microsoft.com/en-us/library/cscc687y.aspx)
-- [cplusplus.com](http://www.cplusplus.com/reference/)
-- [cppreference.com](http://en.cppreference.com/w/)
 
 ## C++ Versions and Compatibility
 
