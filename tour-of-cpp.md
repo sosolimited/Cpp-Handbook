@@ -1,11 +1,12 @@
 A Soso Tour of Cpp
 ==================
 
-This document outlines some core C++ concepts from a high level. Compilable source files demonstrating the concepts accompany each category, and can be built using the instructions in the [Readme](README.md).
+This document outlines some core C++ concepts from a high level. Compilable source files demonstrating the concepts accompany each category, and can be built using the instructions below.
 
 This is not meant to exhaustively document what you can do with C++. Instead, we aim to show a subset of the language that is simple, productive, and--yes--even fun to work with.
 
 **Table of Contents**
+- [Building the Samples](#user-content-working-with-the-samples)
 - [Object Creation](#user-content-object-creation)
 - [Types and Polymorphism](#user-content-types-and-polymorphism)
 - [Namespaces and Aliases](#user-content-namespaces-and-aliases)
@@ -13,6 +14,35 @@ This is not meant to exhaustively document what you can do with C++. Instead, we
 - [Functional Programming](#user-content-functional-programming)
 - [Collections](#user-content-collections)
 - [Asynchronous Programming](#user-content-asynchronous-programming)
+- [Next Steps](#user-content-where-to-go-from-here)
+
+Working with the Samples
+------------------------
+
+### Building and Running
+
+The samples are built with a simple Makefile. So far, they have only been tested with clang on OSX. All code should work in VS2013 and with recent versions of gcc, as well.
+
+```bash
+# Build all samples
+$ cd samples
+$ make all
+
+# Run a sample
+$ ./SampleName.sample
+```
+
+### A Note on Language Versions
+
+We tell the compiler to use C++14 so we can use std::make_unique, which (like many C++14 features) completes and adds consistency to features in C++11. We specify the C++ version we want by passing an option to the compiler in the Makefile.
+
+In Xcode, you can set your “C++ Language Dialect” to C++14. In your build settings, it will look like the following:
+
+![C++ Language Dialect Screenshot](https://cloud.githubusercontent.com/assets/81553/5036817/f7f51060-6b50-11e4-8f81-9f41fbabc23c.png)
+
+### Sample Code Layout
+
+The samples are generally organized in four sections. First, there is a comment explaining what the sample does. Second, we have the code that does the work. Third, the main function calls the functions to do work (sometimes, the second section just lives within the main function). Finally, we try to define any implementation details that aren't particularly relevant to the sample after main().
 
 Object Creation
 ---------------
