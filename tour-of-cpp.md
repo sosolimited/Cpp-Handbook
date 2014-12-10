@@ -46,7 +46,7 @@ The samples are generally organized in four sections. First, there is a comment 
 
 Object Creation
 ---------------
-[Compilable Source](ObjectCreation.cpp?ts=2)
+[Compilable Source](samples/ObjectCreation.cpp?ts=2)
 
 Objects can live in two main places: on the stack, or in dynamic memory. Objects that live on the stack are destroyed automatically when their name falls out of scope. Dynamic objects will live forever if unmanaged, so we use stack-allocated pointer objects to manage their lifetime.
 
@@ -160,7 +160,7 @@ public:
 
 Namespaces and Aliases
 ----------------------
-[Compilable Source](NamespacesAndAliases.cpp?ts=2)
+[Compilable Source](samples/NamespacesAndAliases.cpp?ts=2)
 
 When dealing with large projects or multiple sets of code, it is useful to group sections of code together under a common name. Similarly, it can be useful to have a shorthand for complex types.
 
@@ -215,7 +215,7 @@ using ThingHandle = Handle<Thing>;
 
 Templates
 ---------
-[Compilable Source](Templates.cpp?ts=2)
+[Compilable Source](samples/Templates.cpp?ts=2)
 
 Templates allow us to write code that can operate on any type. They enable compile-time polymorphism: the template is filled out by the compiler for each type that uses it.
 
@@ -233,7 +233,7 @@ auto result = std::max<float>( 10, 20.0 );
 
 Functional Programming
 ----------------------
-[Compilable Source](Functional.cpp?ts=2)
+[Compilable Source](samples/Functional.cpp?ts=2)
 
 ### Function Objects (std::function)
 
@@ -295,7 +295,7 @@ fn();   // j now equals 5, since variable is referenced in fn.
 
 Collections
 -----------
-[Compilable Source](Collections.cpp?ts=2)
+[Compilable Source](samples/Collections.cpp?ts=2)
 
 C++ provides a large number of container types in the STL.
 
@@ -383,7 +383,7 @@ There are many approaches to and reasons for asynchronous programming. Generally
 C++ constructs for enabling asynchronous programming include `async` calls with `futures`, and `threads` with `atomics` and `mutexes`. Futures and async not only reduce the chances for race conditions, they also enable you to control the re-entry point for asynchronous code. Threads are useful for continuously-running functions, and especially when you don't need results from the function back on the main thread.
 
 ### Async and Future
-[Compilable Source](AsyncAndFuture.cpp?ts=2)
+[Compilable Source](samples/AsyncAndFuture.cpp?ts=2)
 
 `std::async` runs a function in parallel with your current code. It returns a `future` that you can use to check on the progress of the function.
 
