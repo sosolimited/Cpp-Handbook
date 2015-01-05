@@ -1,7 +1,7 @@
 Soso C++ Style
 ==============
 
-Derived from [Soso C++](https://docs.google.com/a/sosolimited.com/document/d/1tcOoIWlAf2IMTu2caApXgI9-pp09pMvNEp0b2y8s8b4). Discussions or changes to the style may happen in the future.
+Derived from earlier Soso C++ doc. Discussions or changes to the style may happen in the future.
 
 ## Indentation
 
