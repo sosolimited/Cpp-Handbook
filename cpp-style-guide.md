@@ -7,6 +7,24 @@ Derived from earlier Soso C++ doc. Discussions or changes to the style may happe
 
 Use tabs, 2-spaces wide. Note that this markdown document is indented with spaces, since it is (currently) not possible to tell github to change the tab width of code snippets inside markdown files.
 
+### Xcode Setup
+
+Open Xcode preferences and change the indentation settings in the text editing panel.
+![xcode indentation settings](https://cloud.githubusercontent.com/assets/81553/5666200/06e320ba-972c-11e4-9f60-8b970f6dc499.png)
+
+As a bonus, you can also tell Xcode to trim trailing whitespace in the editing panel.
+![xcode trim trailing whitespace](https://cloud.githubusercontent.com/assets/81553/5666201/06e45c5a-972c-11e4-9a36-4e1f6e8da1e0.png)
+
+### Sublime Text Setup
+
+Open Sublime preferences and add the following options to the json:
+
+```json
+"indent_using_spaces": false,
+"tab_size": 2,
+"trim_trailing_white_space_on_save": true
+```
+
 ## Variable naming
 
 Member variables don't use prefixes, and are written with initialCapitals (camelCase).
@@ -114,19 +132,3 @@ void comments::renderAsSprites( const vector<Type> &points ) {
 The sentiment expressed in the [preamble to BitSquid’s coding style](http://www.bitsquid.se/files/coding_style.html#A common style is good) holds true here. Consistent style helps us read each others code and makes the project cohesive. Some of the choices to that end are arbitrary. Style revision wars do not help us.
 
 Follow the guidelines in this document as you write. If you are working on a section of code that doesn't follow the guide, update it as you are making your changes. Avoid style-only revisions.
-
-<!--
-(David) would be interested in slightly altering the style.
-
-Seen a lot of indentation using spaces in our javascript code. Nice part is that it works regardless of an individual's IDE settings.
-
-Function arguments and local variables are equivalent as far as the function body is concerned. We therefore should treat them the same when we write them. Member variables would need something to set them apart since they belong to a different scope and should be considered differently in a method body.
-
-Since we like camelCase as Soso, we should stick with that throughout. But then we need to disambiguate the special case (member variables). An "m" prefix works okay, but I prefer intial underscore "_" since it doesn't force you into initial capitals, and other variables could start with 'm.' For example, `mountain` `mPlaintain` are visually similar where `mountain` `_plantain` are more obviously different.
-
-All variables could have the same naming format, with an initial underscore to disambiguate member variables. someLocalVar, _someMemberVar.
-```c++
-float       _memberVariable = 1.0f;
-std::string _anotherMember;
-```
- -->
