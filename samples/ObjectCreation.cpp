@@ -150,6 +150,7 @@ void createDynamicObjects() {
 	// will destroy the pointed-to object.
 	base = derived;
 
+	// Pass the pointed-to object to the changeObject function.
 	changeObject( *derived );
 
 	cout << endl;

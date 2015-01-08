@@ -8,6 +8,7 @@ This is not meant to exhaustively document what you can do with C++. Instead, we
 **Table of Contents**
 - [Building the Samples](#user-content-working-with-the-samples)
 - [Object Creation](#user-content-object-creation)
+- [Parameter Passing](#user-content-parameter-passing)
 - [Types and Polymorphism](#user-content-types-and-polymorphism)
 - [Namespaces and Aliases](#user-content-namespaces-and-aliases)
 - [Templates](#user-content-templates)
@@ -93,6 +94,50 @@ auto objectURef = std::make_unique<Object>();
 ```
 
 Since the dynamic memory `Object` in the above code is managed by a stack-allocated pointer object, we know the dynamic memory will be freed when our pointer object falls out of scope.
+
+Parameter Passing
+-----------------
+
+There are three basic rules for passing parameters
+
+- Pass built-in types by value (float, double, int).
+- Pass read-only parameters by const T&.
+- Pass read-write parameters by T&.
+
+In code, this ends up looking like the following:
+
+```c++
+float passByValue( float iValue );
+void useObjectInfo( const Type &iObject );
+void modifyObject( Type &iObject );
+
+float number = 10.0f;
+number = passByValue( number );
+
+Type instance;
+shared_ptr<Type> dynamicInstance;
+
+useObjectInfo( instance );
+useObjectInfo( *dynamicInstance );
+
+modifyObject( instance );
+modifyObject( *dynamicInstance );
+```
+
+With the introduction of move-only types in C++11, we get a fourth rule that only occasionally comes into effect:
+
+- When you have a move-only type that you want to pass ownership of to a new name, pass by T&&.
+
+This occurs most commonly when you want to pass ownership of a std::unique_ptr (or an object that has a std::unique_ptr as a member) into a function. In that case you move the unique_ptr into the function, explicitly giving up control over the pointed-to object.
+
+```c++
+void takeOwnershipOfPointer( std::unique_ptr<Type> &&iPtr );
+
+unique_ptr<Type> ptr;
+takeOwnershipOfPointer( std::move( ptr ) );
+```
+
+There is currently some debate around whether it is preferable to pass by T or T&& when passing a move-only type to a function that will take ownership of the object. T&& makes it clear that the caller should no longer own the object, and it makes sure the object is only moved once.
 
 Types and Polymorphism
 ----------------------
