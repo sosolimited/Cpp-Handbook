@@ -7,11 +7,13 @@ This is not meant to exhaustively document what you can do with C++. Instead, we
 
 **Table of Contents**
 - [Building the Samples](#user-content-working-with-the-samples)
+- [The Basics](#user-content-the-basics)
 - [Object Creation](#user-content-object-creation)
 - [Parameter Passing](#user-content-parameter-passing)
 - [Types and Polymorphism](#user-content-types-and-polymorphism)
 - [Namespaces and Aliases](#user-content-namespaces-and-aliases)
 - [Templates](#user-content-templates)
+- [Type Inference](#user-content-type-inference)
 - [Functional Programming](#user-content-functional-programming)
 - [Collections](#user-content-collections)
 - [Asynchronous Programming](#user-content-asynchronous-programming)
@@ -44,6 +46,38 @@ In Xcode, you can set your “C++ Language Dialect” to C++14. In your build se
 ### Sample Code Layout
 
 The samples are generally organized in four sections. First, there is a comment explaining what the sample does. Second, we have the code that does the work. Third, the main function calls the functions to do work (sometimes, the second section just lives within the main function). Finally, we try to define any implementation details that aren't particularly relevant to the sample after main().
+
+The Basics
+----------
+
+### Source Files
+C++ code is generally broken into two files: the header (.h) and the implementation (.cpp). Header files tell the compiler what functions are available. Implementation files tell the compiler how those functions work. These two pieces are also called declarations (in header files) and definitions (in implementation files). When building C++ projects, it helps to keep these two ideas in mind, as you may run into issues with either missing declarations (e.g. no method by that name) or missing definitions (e.g. linker error: no definition for some method).
+
+You can get access to functions written by others by including the header files that declare those functions in your own files. If you know that a function exists but are receiving compiler errors, make sure you have included the header file that declares the function. We tell the compiler to include files by name:
+
+```c++
+#include "projectFile.h"
+```
+
+### Abstractions (Class, Function)
+C++ provides two main methods of abstraction: classes and functions. A class can store data and provide functions to access and manipulate that data. Functions take data as input and return data as output.
+
+Functions are declared like so:
+```c++
+float sum( float a, float b );
+```
+
+Classes can control who has access to their data by declaring members either public or private. Classes are defined like so:
+```c++
+class ClassName {
+public:
+  // Declare interface in public block.
+private:
+  // Declare member variables in private block.
+};
+```
+
+Structs behave just like classes, only their members are public by default. We typically use them to indicate that a class is a simple container of public data, and use classes when we are going to provide an interface that manages the data.
 
 Object Creation
 ---------------
@@ -274,6 +308,19 @@ When needed, template parameters are passed in using angle-brackets:
 std::vector<Object> collection;
 std::shared_ptr<Object> reference;
 auto result = std::max<float>( 10, 20.0 );
+```
+
+Type Inference
+--------------
+
+C++ is a statically typed language, which means that every object’s type is set at compile time. Because everything needs to have a known type, it is possible for the compiler to infer the type of one object from the known type of another object. C++ uses type inference when we work with templates and when we use the `auto` keyword.
+
+`auto` tells C++ to use the type of the right-hand-side of an expression as the type of the left-hand-hide of that same expression. It allows us to avoid redundant declarations and also to store variables that would otherwise have unwieldy type names. Like any type declaration, `auto` can be qualified with `const`, `&`, or `*`. That way, `const auto&` lets us get a reference to the rhs instead of making a copy.
+
+The following two lines of code produce identical results, but I find the second line much easier to read and comprehend.
+```c++
+std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
+auto now = std::chrono::system_clock::now();
 ```
 
 Functional Programming
