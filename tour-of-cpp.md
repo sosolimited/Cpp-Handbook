@@ -51,12 +51,18 @@ The Basics
 ----------
 
 ### Source Files
-C++ code is generally broken into two files: the header (.h) and the implementation (.cpp). Header files tell the compiler what functions are available. Implementation files tell the compiler how those functions work. These two pieces are also called declarations (in header files) and definitions (in implementation files). When building C++ projects, it helps to keep these two ideas in mind, as you may run into issues with either missing declarations (e.g. no method by that name) or missing definitions (e.g. linker error: no definition for some method).
+C++ code is generally broken into two files: the header (`*.h`) and the implementation (`*.cpp`). Header files tell the compiler what functions are available. Implementation files tell the compiler how those functions work. These two pieces are also called declarations (in header files) and definitions (in implementation files). When building C++ projects, it helps to keep these two ideas in mind, as you may run into issues with either missing declarations (e.g. no method by that name) or missing definitions (e.g. linker error: no definition for some method).
 
 You can get access to functions written by others by including the header files that declare those functions in your own files. If you know that a function exists but are receiving compiler errors, make sure you have included the header file that declares the function. We tell the compiler to include files by name:
 
 ```c++
 #include "projectFile.h"
+```
+
+Compilers only want to see declarations once, but they will try to look at your header files every time you include them. To keep everyone happy, we explicitly tell the compiler to only read declarations from our header files once. We do this by writing the following at the beginning of our header files:
+
+```c++
+#pragma once
 ```
 
 ### Abstractions (Class, Function)
