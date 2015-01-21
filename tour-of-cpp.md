@@ -135,6 +135,26 @@ auto objectURef = std::make_unique<Object>();
 
 Since the dynamic memory `Object` in the above code is managed by a stack-allocated pointer object, we know the dynamic memory will be freed when our pointer object falls out of scope.
 
+The principle behind various smart pointer objects is that they manage the lifetime of the pointed-to object. As an example, here is a simplified implementation of a unique pointer. The destructor of UniquePointer (~UniquePointer) is called when it falls out of scope, guaranteeing the pointed-to object is deleted at an appropriate time.
+
+```c++
+template <typename Type>
+class UniquePointer {
+public:
+  UniquePointer( Type *iPointer )
+  : pointer( iPointer )
+  {}
+
+  ~UniquePointer() {
+    delete pointer;
+  }
+private:
+  Type  *pointer;
+};
+```
+
+The std::unique_ptr and shared_ptr objects are more sophisticated versions of the preceding code.
+
 Parameter Passing
 -----------------
 
@@ -389,6 +409,32 @@ auto fn = [i, &j] () {
 
 i = 0;  // doesn't affect fn's i, since we captured by value.
 fn();   // j now equals 5, since variable is referenced in fn.
+```
+
+As mentioned earlier, lambdas create function objects. Below, we will create our own function object from scratch and then write a lambda that produces an equivalent function object. Hopefully it will illuminate what goes on behind the scenes of lambda creation and also demonstrate how useful lambda syntax is.
+
+```c++
+class Sum {
+public:
+  // The constructor and member variables are analogous to the lambda capture block '[]'
+  Sum( float iBase )
+  : base( iBase )
+  {}
+
+  // The () operator is equivalent to the lambda function definition.
+  float operator() (float iValue) { return base + iValue; }
+private:
+  float base;
+}
+
+float base = 11.0f;
+auto sumFn = Sum( base );
+auto lambdaEquivalent = [base] (float iValue) { return base + iValue; }
+
+// We can use either function object in the same way:
+sumFn( 5.0f );              // => 16.0f;
+lambdaEquivalent( 5.0f );   // => 16.0f
+
 ```
 
 Collections
