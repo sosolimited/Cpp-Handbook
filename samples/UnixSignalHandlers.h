@@ -62,9 +62,9 @@
 #endif
 
 /// Installs more graphics-application-friendly defaults for unix signals.
-/// Default handlers log the signals
-/// Ignore broken pipes to prevent crashing on network errors. Logs the signal.
-/// Exit more gracefully when terminate signal is received. Log
+/// Default handlers log the signals.
+/// Ignore broken pipes to prevent crashing on network errors.
+/// Exit more gracefully when terminate signal is received.
 inline void installUnixSignalHandlers() {
   signal(SIGPIPE, &handleBrokenPipeSignal);
   signal(SIGTERM, &handleTerminateSignal);
